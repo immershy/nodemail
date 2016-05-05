@@ -1,2 +1,2 @@
 # nodemail
-Node email client facilitating nw.js 
+nw.js version of Nylas Email client
