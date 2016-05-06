@@ -57,11 +57,13 @@ class MenuManager
       MenuHelpers.forEachMenuItem @template, (item) =>
         if item.command and item.command.startsWith('application:') is false
           #item.enabled = NylasEnv.commands.listenerCountForCommand(item.command) > 0
-          console.log('item.enabled = NylasEnv.commands.listenerCountForCommand(item.command) > 0')
+          #console.log('item.enabled = NylasEnv.commands.listenerCountForCommand(item.command) > 0')
+          console.log('1')
         if item.submenu?
           item.enabled = not _.every item.submenu, (item) -> item.enabled is false
       #@sendToBrowserProcess(@template, NylasEnv.keymaps.getBindingsForAllCommands())
-      console.log('@sendToBrowserProcess(@template, NylasEnv.keymaps.getBindingsForAllCommands())')
+      #console.log('@sendToBrowserProcess(@template, NylasEnv.keymaps.getBindingsForAllCommands())')
+      console.log('2')
 
   loadPlatformItems: ->
     menusDirPath = path.join(@resourcePath, 'menus')

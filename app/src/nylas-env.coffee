@@ -82,7 +82,13 @@ class NylasEnvConstructor
       safeMode: false,
       resourcePath: path.join(process.cwd(),'app'),
       configDirPath: path.join(process.cwd(),'.email'),
-      windowType: "default"
+      windowType: "default",
+      windowProps: {
+        page: "account-choose",
+        pageData: {
+          provider: "gmail"
+        }
+      }
     }
 
   @getCurrentWindow: ->
@@ -636,15 +642,15 @@ class NylasEnvConstructor
   startWindow: ->
     @loadConfig()
     {packageLoadingDeferred, windowType} = @getLoadSettings()
+    console.log('>>>>>>>>---before extendRxObservables')
     @extendRxObservables()
+    console.log('>>>>>>>>---after extendRxObservables')
     StoreRegistry.activateAllStores()
     #@keymaps.loadBundledKeymaps()
     @themes.loadBaseStylesheets()
     @packages.loadPackages(windowType) unless packageLoadingDeferred
     @deserializePackageStates() unless packageLoadingDeferred
-    console.log('before initializeReactRoot---')
     @initializeReactRoot()
-    console.log('after initializeReactRoot---')
     @packages.activate() unless packageLoadingDeferred
     #@keymaps.loadUserKeymap()
     #@menu.update()
@@ -691,7 +697,6 @@ class NylasEnvConstructor
   # This also means that the windowType has changed and a different set of
   # plugins needs to be loaded.
   populateHotWindow: (event, loadSettings) =>
-    console.log('000000000000000')
     @loadSettings = loadSettings
     @constructor.loadSettings = loadSettings
 
@@ -701,7 +706,6 @@ class NylasEnvConstructor
 
     @emitter.emit('window-props-received', loadSettings.windowProps ? {})
 
-    console.log('000000000000000')
 
     {width, height} = loadSettings
     if width and height

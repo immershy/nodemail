@@ -9,6 +9,7 @@ global.document = window.document
 global.navigator = window.navigator
 global.HTMLElement = window.HTMLElement
 global.gui = require('nw.gui')
+global.MutationObserver = window.MutationObserver
 
 function setupWindow () {
   var CompileCache = require('../src/compile-cache')
